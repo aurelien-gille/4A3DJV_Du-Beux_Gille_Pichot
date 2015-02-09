@@ -1,0 +1,12 @@
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\Assembly-CSharp.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\Assembly-CSharp.pdb
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\UnityEditor.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\UnityEngine.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\UnityEngine.UI.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\Mono.Cecil.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\nunit.framework.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\Unity.DataContract.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\obj\Debug\Assembly-CSharp.dll
+D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\obj\Debug\Assembly-CSharp.pdb

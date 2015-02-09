@@ -54,6 +54,7 @@
      <Compile Include="Assets\Script\MainScene\Interfaces\IPlayer.cs" />
      <Compile Include="Assets\Script\MainScene\MonsterScript.cs" />
      <Compile Include="Assets\Script\MainScene\PointStepManager.cs" />
+     <Compile Include="Assets\Script\MainScene\specScript.cs" />
      <Compile Include="Assets\Script\MenusScene\MenuGameOverScript.cs" />
      <Compile Include="Assets\Script\MenusScene\MenuOptionScript.cs" />
      <Compile Include="Assets\Script\MenusScene\MenuScript.cs" />

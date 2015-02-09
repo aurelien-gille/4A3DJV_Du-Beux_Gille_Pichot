@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InputManagerScript : MonoBehaviour {
-
-	[SerializeField]
+public class InputManagerScript : MonoBehaviour
+{
+    #region Fields
+    [SerializeField]
 	Camera _gameCamera;
 
 	[SerializeField]
@@ -25,13 +26,9 @@ public class InputManagerScript : MonoBehaviour {
     GameObject lastBall;
     private bool _isMoving;
     private GameObject _playerCollider;
+    #endregion
 
-	// Use this for initialization
-	void Start () {
-	    _isMoving = false;
-        _playerCollider = null;
-	}
-
+    #region Public Methods
     public void OnClickAttakingButton()
     {
 
@@ -43,10 +40,14 @@ public class InputManagerScript : MonoBehaviour {
     {
         _networkView.RPC("wantToLaunch", RPCMode.Server, Network.player);
     }
+    #endregion
 
-
-	// Update is called once per frame
-	void Update ()
+    #region Private Methods
+    void Start () {
+	    _isMoving = false;
+        _playerCollider = null;
+	}
+    void Update()
     {
         if (Network.isClient)
         {
@@ -55,15 +56,13 @@ public class InputManagerScript : MonoBehaviour {
             {
                 ClassicPlayerScript playerScript = (ClassicPlayerScript)_playerCollider.GetComponent<ClassicPlayerScript>();
                 PointStepManager actualStep = playerScript.nextStep;
-                Debug.Log(playerScript.isAttacking +"&" + actualStep);
                 if (actualStep != null)
                 {
                     if (!playerScript.isAttacking)
                     {
                         if (Mathf.Pow((_playerCollider.transform.position.x - actualStep.myself.position.x), 2) + Mathf.Pow((_playerCollider.transform.position.z - actualStep.myself.position.z), 2) > 2)
                         {
-                            Debug.Log("pouet1");
-                            _networkView.RPC("wantToMove", RPCMode.Server, Network.player, playerScript.nextStep.myself.position);
+                            _networkView.RPC("wantToMove", RPCMode.Server, int.Parse(Network.player.ToString()), playerScript.nextStep.myself.position);
                         }
                         else
                         {
@@ -71,12 +70,11 @@ public class InputManagerScript : MonoBehaviour {
                             {
                                 playerScript.nextStep = actualStep.NextPoint;
                                 actualStep.DestroySelf();
-                                Debug.Log("pouet2");
-                                _networkView.RPC("wantToMove", RPCMode.Server, Network.player, playerScript.nextStep.myself.position);
+                                _networkView.RPC("wantToMove", RPCMode.Server, int.Parse(Network.player.ToString()), playerScript.nextStep.myself.position);
                             }
                             else
                             {
-                                _networkView.RPC("wantToAttack", RPCMode.Server, Network.player);
+                                _networkView.RPC("wantToAttack", RPCMode.Server, int.Parse(Network.player.ToString()));
                                 playerScript.nextStep = actualStep.NextPoint;
                                 actualStep.DestroySelf();
 
@@ -92,15 +90,8 @@ public class InputManagerScript : MonoBehaviour {
                 if (_playerCollider == null)
                 {
                     int p = int.Parse(Network.player.ToString()) - 1;
-                    Debug.Log(p + "/" + _gameManager.PlayerScript.Length);
                     if (_gameManager.PlayerScript.Length >= p)
                         _playerCollider = _gameManager.PlayerScript[(int.Parse(Network.player.ToString())) - 1].gameObject;
-                }
-
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    _networkView.RPC("wantToShoot", RPCMode.Server, Network.player);
-                    //_gameManager.wantToShoot(0);
                 }
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -120,7 +111,8 @@ public class InputManagerScript : MonoBehaviour {
                     }
                     else if (Physics.Raycast(ray, out hitInfo))
                     {
-                        if (hitInfo.transform.name == "pointStep(Clone)") {
+                        if (hitInfo.transform.name == "pointStep(Clone)")
+                        {
                             PointStepManager pns = (PointStepManager)hitInfo.transform.gameObject.GetComponent<PointStepManager>();
                             if (pns.NextPoint != null)
                             {
@@ -161,7 +153,8 @@ public class InputManagerScript : MonoBehaviour {
                             PointStepManager ns = go.GetComponent<PointStepManager>();
                             go.transform.position = hitInfo.point;
                             go.transform.parent = this.gameObject.transform.FindChild("paths");
-                            if (lastBall == null) {
+                            if (lastBall == null)
+                            {
                                 ClassicPlayerScript lns = (ClassicPlayerScript)_playerCollider.GetComponent<ClassicPlayerScript>();
                                 lns.nextStep = ns;
                             }
@@ -176,7 +169,7 @@ public class InputManagerScript : MonoBehaviour {
                 }
             }
             #endregion
-		}
-	}
-
+        }
+    }
+    #endregion
 }

@@ -5,5 +5,4 @@ public interface IPlayer {
 
 	void tryToMoveTo(Vector3 pos);
 
-	void shoot(Vector3 pos);
 }

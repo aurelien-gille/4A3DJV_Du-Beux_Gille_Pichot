@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PointStepManager : MonoBehaviour
 {
-
+    #region Properties
     [SerializeField]
     public PointStepManager NextPoint;
 
@@ -11,17 +11,9 @@ public class PointStepManager : MonoBehaviour
     public Transform myself;
 
     public bool isAttacking;
+    #endregion
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+    #region Public Methods
     public void DestroySelf()
     {
         Destroy(myself.gameObject);
@@ -34,4 +26,6 @@ public class PointStepManager : MonoBehaviour
             NextPoint.DestroySelf();
         }
     }
+    #endregion
+
 }

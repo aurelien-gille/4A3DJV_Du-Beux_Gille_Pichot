@@ -1,22 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class APlayerScript : MonoBehaviour {
+public abstract class APlayerScript : MonoBehaviour
+{
 
+    #region Properties
     public bool isAttacking;
     public float timeAttack;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
+    public TypePlayer type;
+    #endregion
 
+    #region Public Methods
+    abstract public void tryToMoveTo (Vector3 pos);
 
-	abstract public void tryToMoveTo (Vector3 pos);
-
-    abstract public void tryToShoot();
     abstract public bool tryToAttack();
     abstract public void stopAttack();
-
-
+    #endregion
 }

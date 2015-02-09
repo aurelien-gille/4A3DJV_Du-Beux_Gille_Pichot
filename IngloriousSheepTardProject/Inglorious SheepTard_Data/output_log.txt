@@ -6,33 +6,25 @@ Direct3D:
     Vendor:   NVIDIA
     VRAM:     1972 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.044 seconds
+Platform assembly: D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.051 seconds
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
-Platform assembly: C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Tarthar\Desktop\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\System.dll (this message is harmless)
-UnloadTime: 4.311942 ms
+Platform assembly: D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\ESGI\Projets\JeuxUnity\IngloriousSheepTardProject\Inglorious SheepTard_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 4.480500 ms
 Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
 
-Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 240.
-Total: 0.800174 ms (FindLiveObjects: 0.152376 ms CreateObjectMapping: 0.008289 ms MarkObjects: 0.144876 ms  DeleteObjects: 0.046186 ms)
+Unloading 10 unused Assets to reduce memory usage. Loaded Objects now: 292.
+Total: 0.571609 ms (FindLiveObjects: 0.011447 ms CreateObjectMapping: 0.007895 ms MarkObjects: 0.120401 ms  DeleteObjects: 0.041054 ms)
 
-NB monstre : 1
+The server has disconnected from the client. Most likely the server has shut down.
  
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Server is initialized
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
-
-Server created, waiting for players ...
- 
-(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+(Filename:  Line: 745)
 
