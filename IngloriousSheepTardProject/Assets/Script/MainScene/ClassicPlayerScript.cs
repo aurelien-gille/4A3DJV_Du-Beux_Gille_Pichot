@@ -10,13 +10,20 @@ public class ClassicPlayerScript : APlayerScript
 
     [SerializeField]
     float _speed;
+    Vector3 maxLifeLength;
+
     #endregion
 
     #region Properties
+    public Vector3 MaxLifeLength
+    {
+        get { return maxLifeLength; }
+    }
     [SerializeField]
     public NavMeshAgent Agent;
     [SerializeField]
     public float Range;
+    public float Life;
     public Skills Skill;
     public Transform myTransform
     {
@@ -30,15 +37,24 @@ public class ClassicPlayerScript : APlayerScript
     #endregion
 
     #region Public Methods
+
+    public bool isOnRange(GameObject o)
+    {
+        bool result = false;
+        float tmpDist = Mathf.Pow((o.transform.position.x - myTransform.position.x), 2) + Mathf.Pow((o.transform.position.y - myTransform.position.y), 2);
+        if (tmpDist <= Range * Range)
+            result = true;
+        return result;
+    }
+
     public bool ReceiveAttack(MonsterScript from)
     {
         bool success = Mathf.Floor(UnityEngine.Random.Range(0, 1)) == 0;
         success = true;
         if (success)
         {
-            Skill.life -= from.dammage;
-            Vector3 tmp = myTransform.FindChild("life").localScale;
-            myTransform.FindChild("life").localScale = new Vector3(tmp.x - 1, tmp.y, tmp.z);
+            Life -= from.dammage;
+            myTransform.FindChild("life").localScale = new Vector3(MaxLifeLength.x*Life/Skill.life, MaxLifeLength.y, MaxLifeLength.z);
         }
         return success;
     }
@@ -51,8 +67,8 @@ public class ClassicPlayerScript : APlayerScript
 
         tmpchild.renderer.material.color = new Color(0f, 0f, 0f);
 
-        bool success =  Mathf.Floor(UnityEngine.Random.Range(0, 1)) == 0;
-        success = true; 
+        bool success = true;
+        //success =  Mathf.Floor(UnityEngine.Random.Range(0, 1)) == 0; 
         return success;
     }
 
@@ -96,22 +112,40 @@ public class ClassicPlayerScript : APlayerScript
         }
 
     }
+    public void ChangeType(TypePlayer newType)
+    {
+        type = newType;
+        switch (type)
+        {
+            case TypePlayer.dps: { this.Skill = Skills.dps; this.Life = Skills.dps.life; break; }
+            case TypePlayer.healer: { this.Skill = Skills.healer; this.Life = Skills.healer.life; break; }
+            case TypePlayer.tank: { this.Skill = Skills.tank; this.Life = Skills.tank.life; break; }
+            default: break;
+        }
+        Range = Skill.range;
+        myTransform.FindChild("life").localScale = new Vector3(MaxLifeLength.x * Life / Skill.life, MaxLifeLength.y, MaxLifeLength.z);
+    }
 	#endregion
 
     #region Private Methods
     // Use this for initialization
     void Start()
     {
+
         ActualObjective = _transform.position;
         isAttacking = false;
         isBot = true;
+        maxLifeLength= myTransform.FindChild("life").localScale;
         switch (type)
         {
-            case TypePlayer.dps: { this.Skill = Skills.dps; break; }
-            case TypePlayer.healer: { this.Skill = Skills.healer; break; }
-            case TypePlayer.tank: { this.Skill = Skills.tank; break; }
+            case TypePlayer.dps: { this.Skill = Skills.dps; this.Life = Skills.dps.life;  break; }
+            case TypePlayer.healer: { this.Skill = Skills.healer; this.Life = Skills.healer.life; break; }
+            case TypePlayer.tank: { this.Skill = Skills.tank; this.Life = Skills.tank.life; break; }
             default : break;
         }
+        Range = Skill.range;
+        myTransform.FindChild("life").localScale = new Vector3(MaxLifeLength.x * Life / Skill.life, MaxLifeLength.y, MaxLifeLength.z);
+
     }
 
     // Update is called once per frame

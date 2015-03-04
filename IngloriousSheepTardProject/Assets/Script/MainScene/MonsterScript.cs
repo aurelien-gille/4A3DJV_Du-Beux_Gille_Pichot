@@ -6,6 +6,8 @@ public class MonsterScript : MonoBehaviour
 {
     #region Fields
     private Dictionary<ClassicPlayerScript, int> hating;
+    private float maxLife;
+    private Vector3 maxLifeLength;
     #endregion
     #region Properties
     [SerializeField]
@@ -16,7 +18,7 @@ public class MonsterScript : MonoBehaviour
     public PointStepManager nextStep;
 
 
-    public int life = 15;
+    public float life = 15;
     public int range = 5;
     public int speed = 10;
     public int dammage = 3;
@@ -27,14 +29,13 @@ public class MonsterScript : MonoBehaviour
     #region Public Methods
     public bool ReceiveAttack(ClassicPlayerScript from)
     {
-        bool success = Mathf.Floor(UnityEngine.Random.Range(0, 1)) == 0;
-        success = true;
+        bool success = true;
+        //success = Mathf.Floor(UnityEngine.Random.Range(0, 1)) == 0;
         if (success)
         {
             life -= from.Skill.dammage;
-            hating[from] = hating[from] + (from.Skill.dammage * from.Skill.hates);
-            Vector3 tmp = myself.FindChild("life").localScale;
-            myself.FindChild("life").localScale = new Vector3(tmp.x-1, tmp.y, tmp.z);
+            hating[from] = hating[from] + ((int)from.Skill.dammage * (int)from.Skill.hates);
+            myself.FindChild("life").localScale = new Vector3(maxLifeLength.x*life/maxLife, maxLifeLength.y, maxLifeLength.z);
         }
         return success;
     }
@@ -50,8 +51,8 @@ public class MonsterScript : MonoBehaviour
 
     public void TryToMove(Vector3 to) 
     {
-        Debug.Log(to);
-        Agent.Move(to);
+        Agent.SetDestination(to);
+        Agent.Resume();
     }
 
 
@@ -64,6 +65,10 @@ public class MonsterScript : MonoBehaviour
     {
         isAttacking = false;
     }
+    public void AddRage(ClassicPlayerScript from, int value)
+    {
+        hating[from] += value;
+    }
 	
     #endregion
 
@@ -74,6 +79,8 @@ public class MonsterScript : MonoBehaviour
         range = 5;
         speed = 10;
         dammage = 3;
+        maxLifeLength = myself.FindChild("life").localScale;
+        maxLife = life;
         hating.Add(((ClassicPlayerScript)GameObject.Find("Player1").GetComponentInChildren<ClassicPlayerScript>()), 0);
         hating.Add(((ClassicPlayerScript)GameObject.Find("Player2").GetComponentInChildren<ClassicPlayerScript>()), 0);
         hating.Add(((ClassicPlayerScript)GameObject.Find("Player3").GetComponentInChildren<ClassicPlayerScript>()), 0);

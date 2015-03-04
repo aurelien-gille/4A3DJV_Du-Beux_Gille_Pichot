@@ -71,7 +71,7 @@ public class GameManagerScript : MonoBehaviour
         }
     }
     [RPC]
-    public void monsterLooseLife(int monsterI, int monsterLife, Vector3 monsterLifeBar)
+    public void monsterLooseLife(int monsterI, float monsterLife, Vector3 monsterLifeBar)
     {
         if (Network.isServer)
         {
@@ -98,15 +98,15 @@ public class GameManagerScript : MonoBehaviour
                     int cpt = 0;
                     foreach (ClassicPlayerScript i in PlayerScript)
                     {
-                        if (i != target)
-                            _networkView.RPC("playerLooseLife", RPCMode.Server, cpt, target.Skill.life, target.myTransform.FindChild("life").localScale);
+                        if (i == target)
+                            _networkView.RPC("playerLooseLife", RPCMode.Server, cpt, target.Life, target.myTransform.FindChild("life").localScale);
                         cpt++;
                     }
 
-                    if (target.Skill.life <= 0)
+                    if (target.Life <= 0)
                     {
                         int alivePlayer = PlayerScript.Length;
-                        foreach(ClassicPlayerScript player in  PlayerScript){ if (player.Skill.life <= 0) --alivePlayer; };
+                        foreach(ClassicPlayerScript player in  PlayerScript){ if (player.Life <= 0) --alivePlayer; };
                         if (alivePlayer <= 0)
                         {
                             _networkView.RPC("callGameOver", RPCMode.Server, false);
@@ -139,18 +139,17 @@ public class GameManagerScript : MonoBehaviour
         {
             _networkView.RPC("monsterWantToMove", RPCMode.Others, monster, pos);
         }
-        Debug.Log(pos);
         monsters[monster - 1].TryToMove(pos);
 
     }
     [RPC]
-    public void playerLooseLife(int player, int playerLife, Vector3 playerLifeBar)
+    public void playerLooseLife(int player, float playerLife, Vector3 playerLifeBar)
     {
         if (Network.isServer)
         {
             _networkView.RPC("playerLooseLife", RPCMode.Others, player, playerLife, playerLifeBar);
         }
-        (PlayerScript[player]as ClassicPlayerScript).Skill.life = playerLife;
+        (PlayerScript[player]as ClassicPlayerScript).Life = playerLife;
         (PlayerScript[player] as ClassicPlayerScript).myTransform.FindChild("life").localScale = playerLifeBar;
     }
     [RPC]
@@ -165,7 +164,10 @@ public class GameManagerScript : MonoBehaviour
             PlayerScript[playerId - 1].tryToAttack();
             if (isSucces)
             {
-                attackNearest(PlayerScript[playerId - 1] as ClassicPlayerScript);
+                if(PlayerScript[playerId - 1].type != TypePlayer.healer)
+                    attackNearest(PlayerScript[playerId - 1] as ClassicPlayerScript);
+                else
+                    HealNearest(PlayerScript[playerId - 1] as ClassicPlayerScript);
             }
         }
     }
@@ -238,7 +240,35 @@ public class GameManagerScript : MonoBehaviour
                         #endregion
                         switch (ps.type)
                         {
-                            case TypePlayer.healer: break;
+                            case TypePlayer.healer: {
+                                ClassicPlayerScript nearPlayer = null;
+                                foreach (APlayerScript p in PlayerScript) { 
+                                    ClassicPlayerScript tmpPlayer = p as ClassicPlayerScript;
+                                    if (tmpPlayer != ps && tmpPlayer.Life != tmpPlayer.Skill.life)
+                                        if (tmpPlayer.isOnRange(ps.transform.gameObject))
+                                            nearPlayer = tmpPlayer;
+                                }
+                                GameObject go = (GameObject)Instantiate(_PathPointPrefab);
+                                PointStepManager ns = go.GetComponent<PointStepManager>();
+
+                                ps.nextStep = ns;
+                                if (nearPlayer)
+                                {
+                                    ps.nextStep.isAttacking = true;
+                                    float x = (ps.transform.position.x + ((nearPlayer.transform.position.x + ps.transform.position.x) / 2)) / 2;
+                                    float z = (ps.transform.position.z + ((nearest.transform.position.z + ps.transform.position.z) / 2)) / 2;
+                                    ns.transform.position = new Vector3(x, 0, z);
+                                }
+                                else
+                                {
+                                    nearPlayer = (ClassicPlayerScript)ps.myTransform.gameObject.PickNearestContains(typeof(ClassicPlayerScript));
+                                    float x = (nearPlayer.transform.position.x + ((nearPlayer.transform.position.x + ps.transform.position.x) / 2)) / 2;
+                                    float z = (nearPlayer.transform.position.z + ((nearPlayer.transform.position.z + ps.transform.position.z) / 2)) / 2;
+                                    ns.transform.position = new Vector3(x, 0, z);
+                                    ps.nextStep.isAttacking = false;
+
+                                }
+                                break; }
                             default:
                                 {
                                     GameObject go = (GameObject)Instantiate(_PathPointPrefab);
@@ -257,7 +287,8 @@ public class GameManagerScript : MonoBehaviour
                                     {
                                         float x = (nearest.transform.position.x + ((nearest.transform.position.x + ps.transform.position.x) / 2)) / 2;
                                         float z = (nearest.transform.position.z + ((nearest.transform.position.z + ps.transform.position.z) / 2)) / 2;
-                                        ns.transform.position = new Vector3(x, 0,z);
+                                        ns.transform.position = new Vector3(x, 0, z);
+                                        ps.nextStep.isAttacking = false;
                                     }
                                     break;
                                 };
@@ -272,7 +303,6 @@ public class GameManagerScript : MonoBehaviour
                     if(m.nextStep != null)
                         m.nextStep.DestroySelf();
                     ClassicPlayerScript nearest = m.GetTarget();
-                    Debug.Log(nearest.name);
                     float minDis = 0;
                     minDis = Mathf.Pow((m.myself.position.x - nearest.myTransform.position.x), 2) + Mathf.Pow((m.myself.position.z - nearest.myTransform.position.z), 2);
                     
@@ -285,22 +315,28 @@ public class GameManagerScript : MonoBehaviour
 
                     if (minDis <= m.range * m.range)
                     {
-                        Debug.Log("Attack !");
                         ns.transform.position = ns.transform.position;
                     }
                     else
                     {
 
-                        //float x = (nearest.transform.position.x + ((nearest.transform.position.x + m.myself.position.x) / 2)) / 2;
-                        //float z = (nearest.transform.position.z + ((nearest.transform.position.z + m.myself.position.z) / 2)) / 2;
-                        //ns.transform.position = new Vector3(x, 0, z);
-                        ns.transform.position = m.myself.position;
+                        float x = (nearest.transform.position.x + ((nearest.transform.position.x + m.myself.position.x) / 2)) / 2;
+                        float z = (nearest.transform.position.z + ((nearest.transform.position.z + m.myself.position.z) / 2)) / 2;
+                        ns.transform.position = new Vector3(x, 0, z);
                     }
 
                 });
                 #endregion
             }
         }
+    }
+    [RPC]
+    public void changeType( NetworkPlayer player, int type)
+    {
+        int cpt = 0;
+        while (players[cpt] != player)
+            cpt++;
+        (PlayerScript[cpt] as ClassicPlayerScript).ChangeType((TypePlayer)type); ;
     }
     [RPC]
     public void PlaySequence(bool launched)
@@ -383,7 +419,8 @@ public class GameManagerScript : MonoBehaviour
                                 {
                                     playerScript.nextStep = actualStep.NextPoint;
                                     actualStep.DestroySelf();
-                                   wantToMove(cpt + 1, playerScript.nextStep.myself.position);
+                                    if (playerScript.nextStep != null)
+                                        wantToMove(cpt + 1, playerScript.nextStep.myself.position);
                                 }
                                 else
                                 {
@@ -400,7 +437,7 @@ public class GameManagerScript : MonoBehaviour
             }
         }
         #endregion
-
+        
         #region Enemies
         foreach (MonsterScript monsterScript in monsters)
         {
@@ -453,14 +490,16 @@ public class GameManagerScript : MonoBehaviour
             }
         }
         #endregion
+        
     }
 
     void attackNearest(ClassicPlayerScript aps)
     {
         float minDis = 0;
         MonsterScript nearest = null;
-        int cpt =-1;
-        monsters.ForEach(monst => {
+        int cpt = -1;
+        monsters.ForEach(monst =>
+        {
             ++cpt;
             if (monst.life > 0)
             {
@@ -501,13 +540,42 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    void HealNearest(ClassicPlayerScript aps)
+    {
+        ClassicPlayerScript maxPrior = null;
+        int cpt = -1;
+        int actual = -1;
+        foreach(APlayerScript p in PlayerScript){
+            ClassicPlayerScript player = p as ClassicPlayerScript;
+            cpt++;
+
+            Debug.Log("player" + cpt + " : " + player.Life / player.Skill.life);
+            if (player.Life > 0)
+            {
+                float actualDist = Mathf.Pow((player.myTransform.position.x - aps.myTransform.position.x), 2) + Mathf.Pow((player.myTransform.position.z - aps.myTransform.position.z), 2);
+                if (actualDist < Mathf.Pow(aps.Skill.range, 2))
+                {
+                    if (maxPrior == null || player.Life / player.Skill.life < maxPrior.Life / maxPrior.Skill.life)
+                    {
+                        actual = cpt;
+                        maxPrior = player;
+                    }
+
+                }
+            }
+        }
+        monsters.ForEach(monster => { monster.AddRage(aps, (int)(aps.Skill.heal * aps.Skill.heal)); });
+        maxPrior.Life = maxPrior.Life + aps.Skill.heal <= maxPrior.Skill.life ? maxPrior.Life + aps.Skill.heal : maxPrior.Skill.life;
+        Vector3 newScale = new Vector3(maxPrior.MaxLifeLength.x * maxPrior.Life / maxPrior.Skill.life, maxPrior.MaxLifeLength.y, maxPrior.MaxLifeLength.z);
+        _networkView.RPC("playerLooseLife", RPCMode.Server, actual, maxPrior.Life, newScale);
+    }
+
     void OnServerInitialized()
     {
     }
 
     void OnPlayerConnected(NetworkPlayer player)
     {
-        Debug.Log("Player " + player + " connected from " + player.ipAddress + ":" + player.port);
         players.Add(player);
         if (players.Count <= Datas.Instance.maxPlayer)
         {
@@ -521,11 +589,19 @@ public class GameManagerScript : MonoBehaviour
                     go.transform.FindChild("Player Graphics").gameObject.SetActive(true);
                 }
                 (go.GetComponent<ClassicPlayerScript>() as ClassicPlayerScript).isBot = false;
+                Debug.Log(
+                    (go.GetComponent<ClassicPlayerScript>() as ClassicPlayerScript).Life +" sur "+
+                    (go.GetComponent<ClassicPlayerScript>() as ClassicPlayerScript).Skill.life
+                );
             }
             _networkView.RPC("activeNewPlayer", RPCMode.Server, players.Count - 1);
         }
     }
 
+    void OnConnectedToServer()
+    {
+        _networkView.RPC("changeType", RPCMode.Server, Network.player, (int)Datas.Instance.selectedType);
+    }
 
     #endregion
 

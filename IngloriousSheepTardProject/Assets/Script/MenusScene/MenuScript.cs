@@ -25,4 +25,7 @@ public class MenuScript : MonoBehaviour {
         Datas.Instance.isServer = false;
         Application.LoadLevel("MainScene");
     }
+    public void ChangeTypeToDPS() { Datas.Instance.selectedType = TypePlayer.dps; LaunchClient(); }
+    public void ChangeTypeToTank() { Datas.Instance.selectedType = TypePlayer.tank; LaunchClient(); }
+    public void ChangeTypeToHeal() { Datas.Instance.selectedType = TypePlayer.healer; LaunchClient(); }
 	}
