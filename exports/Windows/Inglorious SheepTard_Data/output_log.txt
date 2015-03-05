@@ -1,0 +1,113 @@
+Initialize engine version: 4.6.0b20 (a3ecf55f1347)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 840M             (ID=0x1341)
+    Vendor:   NVIDIA
+    VRAM:     1972 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.099 seconds
+Initialize engine version: 4.6.0b20 (a3ecf55f1347)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 840M             (ID=0x1341)
+    Vendor:   NVIDIA
+    VRAM:     1972 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.049 seconds
+Initialize engine version: 4.6.0b20 (a3ecf55f1347)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 840M             (ID=0x1341)
+    Vendor:   NVIDIA
+    VRAM:     1972 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+- Completed reload, in  0.067 seconds
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\System.dll (this message is harmless)
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\System.dll (this message is harmless)
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: D:\ESGI\Projets\JeuxUnity\exports\Windows\Inglorious SheepTard_Data\Managed\System.dll (this message is harmless)
+UnloadTime: 3.413078 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 13 unused Assets to reduce memory usage. Loaded Objects now: 338.
+Total: 0.594110 ms (FindLiveObjects: 0.015790 ms CreateObjectMapping: 0.007895 ms MarkObjects: 0.123954 ms  DeleteObjects: 0.049344 ms)
+
+UnloadTime: 3.249253 ms
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 242.
+Total: 0.547924 ms (FindLiveObjects: 0.024475 ms CreateObjectMapping: 0.007500 ms MarkObjects: 0.147244 ms  DeleteObjects: 0.003552 ms)
+
+The connection request to 67.225.180.24:50005 failed. Are you sure the server can be connected to?
+ 
+(Filename:  Line: 650)
+
+UnloadTime: 1.385995 ms
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0 / Dirty serialized files: 0)
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 338.
+Total: 0.663983 ms (FindLiveObjects: 0.011447 ms CreateObjectMapping: 0.009079 ms MarkObjects: 0.134217 ms  DeleteObjects: 0.052897 ms)
+
+20 sur 20
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+tank
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+tank
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+player0 : 1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+player1 : 0.7
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+player2 : 1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+ArgumentOutOfRangeException: Argument is out of range.
+Parameter name: index
+  at System.Collections.Generic.List`1[MonsterScript].get_Item (Int32 index) [0x00000] in <filename unknown>:0 
+  at GameManagerScript.monsterWantToStopAttack (Int32 monster) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+

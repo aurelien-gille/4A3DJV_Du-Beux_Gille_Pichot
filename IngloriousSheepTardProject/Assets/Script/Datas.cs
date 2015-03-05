@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Datas {
     #region Properties
@@ -64,6 +65,10 @@ public static class ToolBox {
         return result;
     }
 
+    public static void FadeIn(this GameObject from, float seconds, bool DestroyAfterFade)
+    {
+        throw new NotImplementedException("The requested feature is not implemented.");
+    }
     #endregion
 }
 

@@ -7,6 +7,12 @@ public class ClassicPlayerScript : APlayerScript
     #region Fields
     [SerializeField]
     Transform _transform;
+    [SerializeField]
+    GameObject _SkinDamage;
+    [SerializeField]
+    GameObject _SkinTank;
+    [SerializeField]
+    GameObject _SkinHeal;
 
     [SerializeField]
     float _speed;
@@ -114,12 +120,16 @@ public class ClassicPlayerScript : APlayerScript
     }
     public void ChangeType(TypePlayer newType)
     {
+        Debug.Log(newType);
         type = newType;
+        this._SkinDamage.SetActive(false);
+        this._SkinHeal.SetActive(false);
+        this._SkinTank.SetActive(false);
         switch (type)
         {
-            case TypePlayer.dps: { this.Skill = Skills.dps; this.Life = Skills.dps.life; break; }
-            case TypePlayer.healer: { this.Skill = Skills.healer; this.Life = Skills.healer.life; break; }
-            case TypePlayer.tank: { this.Skill = Skills.tank; this.Life = Skills.tank.life; break; }
+            case TypePlayer.dps: { this.Skill = Skills.dps; this.Life = Skills.dps.life; this._SkinDamage.SetActive(true); break; }
+            case TypePlayer.healer: { this.Skill = Skills.healer; this.Life = Skills.healer.life; this._SkinHeal.SetActive(true); break; }
+            case TypePlayer.tank: { this.Skill = Skills.tank; this.Life = Skills.tank.life; this._SkinTank.SetActive(true); break; }
             default: break;
         }
         Range = Skill.range;

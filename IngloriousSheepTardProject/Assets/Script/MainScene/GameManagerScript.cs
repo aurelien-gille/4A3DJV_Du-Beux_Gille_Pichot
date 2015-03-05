@@ -331,12 +331,31 @@ public class GameManagerScript : MonoBehaviour
         }
     }
     [RPC]
-    public void changeType( NetworkPlayer player, int type)
+    public void changeType(NetworkPlayer player, int type)
     {
-        int cpt = 0;
-        while (players[cpt] != player)
-            cpt++;
-        (PlayerScript[cpt] as ClassicPlayerScript).ChangeType((TypePlayer)type); ;
+        if (Network.isServer)
+        {
+            int cpt = 0;
+            foreach (NetworkPlayer p in players) {
+                if (p == player) {
+                    changeTypeReal(cpt, type);
+                }
+                else {
+                    Debug.Log("player"+cpt+" type : "+(PlayerScript[cpt] as ClassicPlayerScript).type);
+                    changeTypeReal(cpt, (int)(PlayerScript[cpt] as ClassicPlayerScript).type);
+                }
+                cpt++;
+            }
+        }
+    }
+    [RPC]
+    public void changeTypeReal(int playerId, int type)
+    {
+        (PlayerScript[playerId] as ClassicPlayerScript).ChangeType((TypePlayer)type);
+        if (Network.isServer)
+        {
+            _networkView.RPC("changeTypeReal", RPCMode.Others, playerId, type);
+        }
     }
     [RPC]
     public void PlaySequence(bool launched)
